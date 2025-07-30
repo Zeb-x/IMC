@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="card mx-auto" style="max-width: 500px;">
+            <div class="card-body text-center">
+                <h3 class="mb-4">BMI Result</h3>
+                <p>
+                    Your Weight is: <strong th:text="${peso}">[peso]</strong> kg your Height is: 
+                    <strong th:text="${altura}">[altura]</strong> m.<br>
+                    Hence your BMI is: <strong th:text="${#numbers.formatDecimal(imc, 1, 2)}">[imc]</strong> kg/m<sup>2</sup>.
+                </p>
+                <div class="mt-4">
+                    <button class="btn btn-info mb-2" th:if="${imc <= 18.5}">Underweight</button>
+                    <button class="btn btn-success mb-2" th:if="${imc > 18.5 and imc < 25}">Normal</button>
+                    <button class="btn btn-warning mb-2" th:if="${imc >= 25 and imc < 30}">Overweight</button>
+                    <button class="btn btn-danger mb-2" th:if="${imc >= 30}">Obese</button>
+                </div>
+                <form th:action="@{/login}" method="get" class="mt-4">
+                    <button type="submit" class="btn btn-primary">Go to Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
