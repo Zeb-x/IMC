@@ -1,0 +1,19 @@
+language: java
+jdk:
+  - openjdk17
+
+services:
+  - postgresql
+
+env:
+  global:
+    - SPRING_PROFILES_ACTIVE=test
+    - DATABASE_URL=jdbc:postgresql://localhost:5432/testdb
+    - DB_USERNAME=postgres
+    - DB_PASSWORD=postgres
+
+before_script:
+  - psql -c 'CREATE DATABASE testdb;' -U postgres
+
+script:
+  - ./mvnw clean verify
